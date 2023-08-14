@@ -5,22 +5,22 @@ using System.Threading.Tasks;
 
 namespace MVC.Controllers
 {
-    public class LogsCotroller : Controller
+    public class LogsController : Controller
     {
-        private readonly IRequestRepository _request;
-       
-        public LogsCotroller(IRequestRepository request)
+        private readonly IRequestRepository _repo;
+
+        public LogsController(IRequestRepository repo)
         {
-            _request = request;
+            _repo = repo;
         }
 
-
+        /// <summary>
+        /// Метод, возвращающий страницу с историей запросов
+        /// </summary>
         public async Task<IActionResult> Index()
         {
-            var logs = await _request.GetRequests();
+            var logs = await _repo.GetRequests();
             return View(logs);
         }
-
-
     }
 }
